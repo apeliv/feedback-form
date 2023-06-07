@@ -1,5 +1,6 @@
 import { Button, StyleSheet, Text, View } from "react-native";
 import DataInput from "./components/DataInput";
+import EmojiSlider from "./components/EmojiSlider";
 
 export default function App() {
   return (
@@ -11,8 +12,9 @@ export default function App() {
       </View>
       <View>
         <Text style={styles.text}>Share your experience in scaling</Text>
+        <EmojiSlider />
       </View>
-      <Button title="Send" />
+      <Button title="Submit" />
     </View>
   );
 }
@@ -23,6 +25,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-evenly",
+    margin: "2%",
   },
   textInputSection: {
     flexDirection: "row",
@@ -31,9 +34,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   text: {
-    margin: 2,
+    marginLeft: 15,
     fontSize: 20,
-    color: "#3944bc",
+    color: "#2071b2",
     fontWeight: "bold",
   },
 });
