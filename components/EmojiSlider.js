@@ -35,7 +35,6 @@ const EmojiSlider = () => {
       </View>
       <Slider
         style={styles.slider}
-        thumbStyle={{ width: "100%", height: 15 }}
         minimumValue={1}
         maximumValue={5}
         step={1}
@@ -44,7 +43,7 @@ const EmojiSlider = () => {
         minimumTrackTintColor="#105955"
         maximumTrackTintColor="#a5e0dd"
         thumbTintColor="#a5e0dd"
-       />
+      />
     </View>
   );
 };
@@ -90,9 +89,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   slider: {
-    transform: [{ scaleX: 2 }, { scaleY: 2 }],
-    width: Dimensions.get("window").width / 2,
+    // transform: [{ scaleX: 2 }, { scaleY: 2 }],
+    // width: Dimensions.get("window").width / 2,
+    width: "100%",
     alignSelf: "center",
     marginTop: "7.5%",
+    marginBottom: "3%",
   },
 });
