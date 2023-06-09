@@ -1,0 +1,28 @@
+{
+  "people": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "phoneNumber": "0912351205",
+      "email": "john.doe@outlook.com",
+      "experience": "Not good",
+      "comment": "No comment"
+    },
+    {
+      "name": "James Bond",
+      "phoneNumber": "0910070007",
+      "email": "james.bond@secretservice.com",
+      "experience": "Worst",
+      "comment": "",
+      "id": 3
+    },
+    {
+      "name": "Luka Modric",
+      "phoneNumber": "0991010101",
+      "email": "luka.modric@gmail.com",
+      "experience": "Look Good",
+      "comment": "The best midfielder in the world.",
+      "id": 4
+    }
+  ]
+}

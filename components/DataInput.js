@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
-const DataInput = ({ label, placeholder, dataState, setDataState, regEx }) => {
+const DataInput = ({
+  label,
+  placeholder,
+  dataState,
+  setDataState,
+  regEx,
+  setDisableButton,
+}) => {
   const [errorWarning, setErrorWarning] = useState("");
   const [isDisplayInputBorderRed, setIsDisplayInputBorderRed] = useState(false);
 
@@ -8,9 +15,11 @@ const DataInput = ({ label, placeholder, dataState, setDataState, regEx }) => {
     if (!regEx.test(dataState)) {
       setErrorWarning(`Enter a valid ${label.toLowerCase()}`);
       setIsDisplayInputBorderRed(true);
+      setDisableButton(true);
     } else {
       setErrorWarning("");
       setIsDisplayInputBorderRed(false);
+      setDisableButton(false);
     }
   };
 

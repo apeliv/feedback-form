@@ -1,29 +1,27 @@
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import Slider from "@react-native-community/slider";
-import { useState } from "react";
 
-const EmojiSlider = () => {
-  const [rating, setRating] = useState(1);
+const EmojiSlider = ({ rating, setRating }) => {
   const emojis = [
-    { id: 1, emoji: "😖", description: "Worst" },
-    { id: 2, emoji: "😟", description: "Not good" },
-    { id: 3, emoji: "😐", description: "Fine" },
-    { id: 4, emoji: "😃", description: "Look good" },
-    { id: 5, emoji: "😍", description: "Very good" },
+    { emoji: "😖", description: "Worst" },
+    { emoji: "😟", description: "Not good" },
+    { emoji: "😐", description: "Fine" },
+    { emoji: "😃", description: "Look good" },
+    { emoji: "😍", description: "Very good" },
   ];
   return (
     <View>
       <View style={styles.emojisContainer}>
-        {emojis.map((emoji) => (
-          <View key={emoji.id}>
+        {emojis.map((emoji, index) => (
+          <View key={index}>
             <Text
-              style={emoji.id === rating ? styles.activeEmoji : styles.emoji}
+              style={index + 1 === rating ? styles.activeEmoji : styles.emoji}
             >
               {emoji.emoji}
             </Text>
             <Text
               style={
-                emoji.id === rating
+                index + 1 === rating
                   ? styles.activeDescription
                   : styles.description
               }
