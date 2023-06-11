@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
   emojisContainer: {
     width: "90%",
     flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "space-between",
     fontSize: 20,
     marginTop: "5%",
@@ -87,11 +88,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   slider: {
-    // transform: [{ scaleX: 2 }, { scaleY: 2 }],
-    // width: Dimensions.get("window").width / 2,
     width: "100%",
     alignSelf: "center",
-    marginTop: "7.5%",
+    marginTop: 5,
     marginBottom: "3%",
   },
 });

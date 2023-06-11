@@ -1,7 +1,8 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import DataInput from "./components/DataInput";
 import EmojiSlider from "./components/EmojiSlider";
-import { useState } from "react";
+import Loading from "./components/Loading";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function App() {
@@ -23,6 +24,9 @@ export default function App() {
   ] = useState(true);
   const [disableButtonForWrongMail, setDisableButtonForWrongMail] =
     useState(true);
+
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const isButtonDisabled =
     disableButtonForWrongName ||
@@ -55,7 +59,8 @@ export default function App() {
 
   const handlePress = () => {
     axios
-      .post("http://10.0.2.2:3000/people", bodyRequest)
+      .post("http://10.0.2.2:3000/people", bodyRequest) //localhost for android emulator
+      // .post("http://192.168.247.232:3000/people", bodyRequest) //localhost for ios physical device
       .then(() => {
         setName("");
         setPhoneNumber("");
@@ -65,56 +70,72 @@ export default function App() {
       })
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      handlePress();
+      setIsLoading(false);
+    }, 2000);
+  }, [isButtonClicked]);
   return (
     <View style={styles.container}>
-      <View style={styles.textInputSection}>
-        <DataInput
-          label="Name"
-          placeholder="Enter name"
-          dataState={name}
-          setDataState={setName}
-          regEx={nameRegEx}
-          setDisableButton={(x) => setDisableButtonForWrongName(x)}
-        />
-        <DataInput
-          label="Number"
-          placeholder="Enter number"
-          dataState={phoneNumber}
-          setDataState={setPhoneNumber}
-          regEx={phoneNumberRegEx}
-          setDisableButton={(x) => setDisableButtonForWrongPhoneNumber(x)}
-        />
-        <DataInput
-          label="Email"
-          placeholder="Enter email"
-          dataState={mailAddress}
-          setDataState={setMailAddress}
-          regEx={mailRegEx}
-          setDisableButton={(x) => setDisableButtonForWrongMail(x)}
-        />
-      </View>
+      {isLoading ? (
+        <View style={styles.loadingContainer}>
+          <Loading />
+        </View>
+      ) : (
+        <View style={styles.container}>
+          <View style={styles.textInputSection}>
+            <DataInput
+              label="Name"
+              placeholder="Enter name"
+              dataState={name}
+              setDataState={setName}
+              regEx={nameRegEx}
+              setDisableButton={(x) => setDisableButtonForWrongName(x)}
+            />
+            <DataInput
+              label="Number"
+              placeholder="Enter number"
+              dataState={phoneNumber}
+              setDataState={setPhoneNumber}
+              regEx={phoneNumberRegEx}
+              setDisableButton={(x) => setDisableButtonForWrongPhoneNumber(x)}
+            />
+            <DataInput
+              label="Email"
+              placeholder="Enter email"
+              dataState={mailAddress}
+              setDataState={setMailAddress}
+              regEx={mailRegEx}
+              setDisableButton={(x) => setDisableButtonForWrongMail(x)}
+            />
+          </View>
 
-      <View>
-        <Text style={styles.text}>Share your experience in scaling</Text>
-        <EmojiSlider rating={rating} setRating={setRating} />
-      </View>
+          <View>
+            <Text style={styles.text}>Share your experience in scaling</Text>
+            <EmojiSlider rating={rating} setRating={setRating} />
+          </View>
 
-      <TextInput
-        style={styles.comment}
-        placeholder="Add your comments..."
-        multiline={true}
-        numberOfLines={4}
-        defaultValue={comment}
-        onChangeText={(text) => setComment(text)}
-      />
+          <TextInput
+            style={styles.comment}
+            placeholder="Add your comments..."
+            multiline={true}
+            numberOfLines={4}
+            defaultValue={comment}
+            onChangeText={(text) => setComment(text)}
+          />
 
-      <Pressable
-        style={isButtonDisabled ? styles.disabledButton : styles.button}
-        disabled={isButtonDisabled}
-        onPress={handlePress}
-      >
-        <Text style={styles.btnText}>SUBMIT</Text>
-      </Pressable>
+          <Pressable
+            style={isButtonDisabled ? styles.disabledButton : styles.button}
+            disabled={isButtonDisabled}
+            onPress={() => setIsButtonClicked(!isButtonClicked)}
+          >
+            <Text style={styles.btnText}>SUBMIT</Text>
+          </Pressable>
+        </View>
+      )}
     </View>
   );
 }
@@ -126,6 +147,13 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-evenly",
     margin: "2%",
+  },
+  loadingContainer: {
+    backgroundColor: "#fff",
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   textInputSection: {
     flexDirection: "row",
@@ -146,6 +174,7 @@ const styles = StyleSheet.create({
     padding: 16,
     fontSize: 18,
     textAlignVertical: "top",
+    marginBottom: 5,
   },
   button: {
     backgroundColor: "#105955",
@@ -153,6 +182,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#105955",
     borderRadius: 10,
+    marginTop: 5,
   },
   disabledButton: {
     backgroundColor: "#20b2aa",
