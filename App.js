@@ -59,8 +59,7 @@ export default function App() {
 
   const handlePress = () => {
     axios
-      .post("http://10.0.2.2:3000/people", bodyRequest) //localhost for android emulator
-      // .post("http://192.168.247.232:3000/people", bodyRequest) //localhost for ios physical device
+      .post("http://10.0.2.2:3000/people", bodyRequest)
       .then(() => {
         setName("");
         setPhoneNumber("");
