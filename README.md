@@ -1,3 +1,4 @@
+> This project represents a simple feedback form built as an iOS and Android application by using Expo and React Native.
 > In this application, data validation of input fields is implemented by using regular expressions:
 > -Regular expression for name input requires two words whose first letters are capitalized. Both words can have up to 16 letters.
 > -Regular expressions for phone number input requires sequence of 10 digits. The first three numbers can be in parentheses. Sequences of first three digits, second three digits and last four digits can be separated either by dash, by dot, or not separated at all. This regular expression also suports phone number formats with plus sign at the start of the digit sequence.
